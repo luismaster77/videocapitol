@@ -1,0 +1,61 @@
+{% extends "stylelogin.html" %}
+{% load crispy_forms_tags %}
+{% block content %}    
+<div class='row'>
+        <div class='col-sm-4 col-sm-offset-5'>        
+<form class="form-signup" action="/accounts/register/" method="post">{% csrf_token %}
+    <h2 class="text-aling-center"><strong>Crea tu cuenta</strong></h2>
+    <br>
+    <div class="fieldWrapper">
+            <label>Rut</label><br>
+            <input type="text" id="rut"> 
+            {{ object.rut }}
+    </div>  
+    <div class="fieldWrapper">
+        <label>Nombres</label><br>
+        <input type="text" id="nombre"> 
+        {{ object.nombres }}
+    </div>    
+    <div class="fieldWrapper">
+        <label>Apellidos</label><br>
+        <input type="text" id="apellido"> 
+        {{ objetc.apellidos }}
+    </div>    
+    <div class="fieldWrapper">
+            <label>Dirección</label><br>
+            <input type="text" id="direccion"> 
+        {{ object.direccion }}
+    </div>
+    <div class="fieldWrapper">
+            <label>Telefono</label><br>
+            <input type="text" id="telefono"> 
+        {{ object.telefono }}
+    </div>
+    <div class="fieldWrapper">    
+        {{ form.email.errors }}            
+        <label>E-mail</label><br>
+        <input type="text" id="email"> 
+        {{ form.email }}
+    </div>    
+    <div class="fieldWrapper">
+    {{form.errors.values.0}}                
+        <label>Nombre de Usuario</label><br>
+        <input type="text" id="username"> 
+        {{ form.username }}
+    </div>
+    <div class="fieldWrapper">        
+        {{form.errors.values.1}}            
+        <label>Contraseña</label><br>
+        <input type="password" id="pass1">                     
+        {{ form.password1 }}
+    </div>
+    <div class="fieldWrapper">           
+        <label>Contraseña de nuevo</label><br>
+        <input type="password" id="pass2"> 
+        {{ form.password2 }}
+    </div>            
+    <br>
+    <input type="submit" name="submit" class="btn btn-primary" value="Crear cuenta">
+</form>
+
+{% endblock %}

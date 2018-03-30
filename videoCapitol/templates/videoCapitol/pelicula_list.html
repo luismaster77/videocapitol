@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block section %}
+ <h2>PELICULA</h2> 
+ <hr>
+{% endblock section %}
+{% block maincontent %}
+<form action="." method="GET">
+ 	<div class="row well" id="id_pelicula" name="id_pelicula">
+ 		{% for p in object_list.all %}
+ 		<div class="col-md-4 well">
+ 		<div class="panel panel-primary">
+ 		<div class="panel-heading">
+		 <h3 class="panel-title">{{ p.titulo }}</h3>
+	 </div>
+ <div class="panel-body" name="id_pelicula" id="id_pelicula">
+ 	<a href="{% url 'pelicula-detail' p.id_pelicula %}" id="id_pelicula" name="id_pelicula">
+ 		<img src="{% static p.foto.url %}" style="width:285px;height:250px;"/>
+ 	</a>
+	 </div>
+</form>
+ <div class="panel-footer">
+ {% if p.comment %}
+ {{ p.comment }}
+ {% else %}
+ 	<a class="btn btn-success" href="{% url 'reservar' %}">RESERVAR</a>
+ {% endif %}
+ 		</div>
+ 	</div>
+ </div>
+ {% endfor %}
+ 	</div>
+{% endblock maincontent %}

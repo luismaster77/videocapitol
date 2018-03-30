@@ -1,0 +1,84 @@
+{% load adminlte_helpers %}
+<!-- Left side column. contains the sidebar -->
+<aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+        <!-- Sidebar user panel -->
+        {% block user_panel %}
+                  <!-- User Account Menu -->
+                  <li class="dropdown user user-menu">
+        <div class="user-panel">
+            <div class="pull-left image">
+                <img src="https://s.gravatar.com/avatar/abbc0f09762215a82ea7007aa422a4cd?s=80" class="img-circle" alt="User Image">
+            </div>
+            <div class="pull-left info">
+                <p>{% firstof request.user.get_full_name request.user.username %}</p>
+            </div>
+        </div>
+        {% endblock %}
+
+        {% block form %}{% endblock %}
+
+        <!-- sidebar menu: : style can be found in sidebar.less -->
+        {% block nav_links_ul %}
+        <ul class="sidebar-menu">
+            {% block nav_links_outer %}
+            <li class="header">{% block nav_heading %}NAVEGACION PRINCIPAL{% endblock %}</li>
+
+            {% block nav_links %}
+            <li>
+                <a href="{% url 'pelicula-list' %}">
+                    <i class="fa fa-caret-square-o-right"></i> <span>PELICULAS</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li>
+                        <a href="{% url 'pelicula-list'%}">
+                            <i class="fa fa-binoculars"></i>Ver mis Pelis
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            {% if perms.usuario.usuario %}
+            <li class="treeview">
+                <a href="http://www.xoftix.com/xoftix/">
+                    <i class="fa fa-pencil-square-o"></i> <span>AGREGAR PELICULA</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li>
+                        <a href="{% url 'pelicula-create' %}">
+                            <i class="fa fa-id-card"></i>Crear peliculas
+                        </a>
+                    </li>
+                </ul>
+             </li>
+             {% endif %}
+             {% if perms.usuario.usuario %}
+             <li class="treeview">
+                <a href="http://www.xoftix.com/xoftix/">
+                    <i class="fa fa-pencil-square-o"></i> <span>EDITAR/ELIMINAR PELICULA</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li>
+                        <a href="{% url 'pelicula-list' %}">
+                            <i class="fa fa-id-card"></i>Editar o eliminar pelicula
+                        </a>
+                    </li>
+                </ul>
+             </li>
+             {% endif %}
+                {% endblock nav_links %}
+            {% endblock nav_links_outer %}
+        </ul>
+        {% endblock nav_links_ul %}
+    </section>
+    <!-- /.sidebar -->
+</aside>
+      

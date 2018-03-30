@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% block section %}
+ <h2>
+ {{ object.titulo }}
+ {% if object.favorite %}
+    &#9733;
+ {% else %}
+    &#9734;
+ {% endif %}
+ {% if object.pelicula_id %}
+ (<a href="{% url 'pelicula-detail' object.pelicula_id %}">{{ object.pelicula }}</a>)
+ {% endif %}
+ </h2>
+ {% if perms.usuario.usuario %}
+ <a class="btn btn-warning" href="{% url 'pelicula-update' object.id_pelicula %}">Editar</a>
+ <a class="btn btn-danger" href="{% url 'pelicula-delete' object.id_pelicula %}">Eliminar</a>
+ {% endif %}
+ {% if user.is_authenticated %} 
+ <a class="btn btn-success" href="{% url 'reservar' %}" id="id_pelicula" name="id_pelicula">Reservar</a>
+{% else %}
+ <p>Tú no tienes permisos para reservar esta pelicula</p>
+{% endif %}
+{% endblock section %}
+<hr>
+<div>
+ <div>
+ <img src="{% static object.foto.url %}" style="width:550px;height:420px"/>
+</div>
+</div>
+<hr>
+<div class="container">
+<div style="float:left"> 
+    <div style="width:550px; background:rgb(225, 226, 224); float:center;">
+    <p><strong>Descripción:</strong></p>
+    {{ object.descripcion  }}</div>
+</div> 
+</div>
+<hr>
+<div class="container">
+<div style="float:left">
+    <div style="width:550px; background:rgb(225, 226, 224); float:center;">
+    <p><strong>Director:</strong></p>
+    {{ object.director  }}</div>
+</div> 
+</div>
+<hr>
+<div class="container">
+<div style="float:left">
+    <div style="width:550px; background:rgb(225, 226, 224); float:center;">
+    <p><strong>Elenco:</strong></p>
+    {{ object.actores  }}</div>
+</div> 
+</div>
+<hr>
+<p><strong>commentarios: </strong>{{ object.comment|default:"Sin commentarios" }}</p>
+{% endblock content %} 

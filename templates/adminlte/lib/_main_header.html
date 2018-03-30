@@ -1,0 +1,191 @@
+{% load adminlte_helpers i18n %}
+<header class="main-header">
+    <!-- Logo -->
+    {% block logo %}
+    <a href="{% block logo_href %}/{% endblock %}" class="logo">
+        <!-- mini logo for sidebar mini 50x50 pixels -->
+        <span class="logo-mini">{% block logo_text_small %}<b></b>VITOL{% endblock %}</span>
+        <!-- logo for regular state and mobile devices -->
+        <span class="logo-lg">{% block logo_text %}<b>VIDEO CAPITOL</b>{% endblock %}</span>
+          <!-- User Image -->
+    </a>
+    {% endblock %}
+    
+    <!-- Header Navbar: style can be found in header.less -->
+    {% block nav_bar %}
+    <nav class="navbar navbar-static-top">
+        <!-- Sidebar toggle button-->
+        <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </a>
+
+        {% block nav_bar_center %}
+        
+        {% endblock %}
+
+        {% block nav_custom_menu %}
+        <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                  <!-- Messages: style can be found in dropdown.less-->
+                  <li class="dropdown messages-menu">
+                    <!-- Menu toggle button -->
+                    {% if user.is_not_authenticated %}
+                      <a href="{% url 'auth_login' %}"> Iniciar Sesión</a>
+                    {% else %}
+                    <a>Bienvenido</a>
+                    {% endif %}
+                    <ul class="dropdown-menu">
+                      <li class="header">You have 4 messages</li>
+                      <li>
+                        <!-- inner menu: contains the messages -->
+                        <ul class="menu">
+                          <li>
+                            <!-- start message -->
+                            <a href="#">
+                              <div class="pull-left">
+                                <!-- User Image -->
+                                <img src="https://s.gravatar.com/avatar/abbc0f09762215a82ea7007aa422a4cd?s=80" class="img-circle" alt="User Image">
+                              </div>
+                              <!-- Message title and timestamp -->
+                              <h4>
+                                  Support Team
+                                  <small><i class="fa fa-clock-o"></i> 5 mins</small>
+                                </h4>
+                              <!-- The message -->
+                              <p>Why not buy a new awesome theme?</p>
+                            </a>
+                          </li>
+                          <!-- end message -->
+                        </ul>
+                        <!-- /.menu -->
+                      </li>
+                      <li class="footer"><a href="#">See All Messages</a></li>
+                    </ul>
+                  </li>
+                  <!-- /.messages-menu -->
+        
+                  <!-- Notifications Menu -->
+                  <li class="dropdown notifications-menu">
+                    <!-- Menu toggle button -->
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                      <i class="fa fa-bell-o"></i>
+                      <span class="label label-warning">10</span>
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li class="header">You have 10 notifications</li>
+                      <li>
+                        <!-- Inner Menu: contains the notifications -->
+                        <ul class="menu">
+                          <li>
+                            <!-- start notification -->
+                            <a href="#">
+                              <i class="fa fa-users text-aqua"></i> 5 new members joined today
+                            </a>
+                          </li>
+                          <!-- end notification -->
+                        </ul>
+                      </li>
+                      <li class="footer"><a href="#">View all</a></li>
+                    </ul>
+                  </li>
+                  <!-- Tasks Menu -->
+                  <li class="dropdown tasks-menu">
+                    <!-- Menu Toggle Button -->
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                      <i class="fa fa-flag-o"></i>
+                      <span class="label label-danger">9</span>
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li class="header">You have 9 tasks</li>
+                      <li>
+                        <!-- Inner menu: contains the tasks -->
+                        <ul class="menu">
+                          <li>
+                            <!-- Task item -->
+                            <a href="#">
+                              <!-- Task title and progress text -->
+                              <h3>
+                                  Design some buttons
+                                  <small class="pull-right">20%</small>
+                                </h3>
+                              <!-- The progress bar -->
+                              <div class="progress xs">
+                                <!-- Change the css width attribute to simulate progress -->
+                                <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                                  <span class="sr-only">20% Complete</span>
+                                </div>
+                              </div>
+                            </a>
+                          </li>
+                          <!-- end task item -->
+                        </ul>
+                      </li>
+                      <li class="footer">
+                        <a href="#">View all tasks</a>
+                      </li>
+                    </ul>
+                  </li>
+        <div class="navbar-custom-menu">
+            <ul class="nav navbar-nav">
+                {% block header_dropdowns %}
+                    {% if request.user.is_authenticated %}
+                        <li class="dropdown user user-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <img src="{% avatar_url size=50 %}" class="user-image" alt="User Image">
+                                <span class="hidden-xs">{% firstof request.user.get_short_name request.user.get_username %}</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                {% block user_header %}
+                                <li class="user-header">
+                                    <img src="{% avatar_url size=180 %}" class="img-circle" alt="User Image">
+                                    <p>
+                                        {% firstof request.user.get_short_name request.user.get_username %}
+                                        <small>Member since {{ request.user.date_joined }}</small>
+                                    </p>
+                                </li>
+                                {% endblock %}
+
+                                <!-- Menu Footer-->
+                                {% block menu_footer %}
+                                <li class="user-footer">
+                                    <div class="pull-left">
+                                        <a href="{% block change_password_url %}{% url 'admin:password_change' %}{% endblock %}"
+                                           class="btn btn-default btn-flat">{% trans 'Change password' %}</a>
+                                    </div>
+                                    <div class="pull-right">
+                                        <a href="{% block logout_url %}{% logout_url %}{% endblock %}" class="btn btn-default btn-flat">Sign out</a>
+                                    </div>
+                                </li>
+                                {% endblock %}
+
+                            </ul>
+                        </li>
+                    {% endif %}
+                {% endblock header_dropdowns %}
+            </ul>
+        </div>
+        {% endblock nav_custom_menu %}
+    </nav>
+    {% endblock %}
+    <!--{% block content %}
+    {% if not user.id_authenticated %}
+    <div class='col-sm-11 col-sm-offset-5'>
+    <h1>Bienvenido {{user}}</h1>
+    <div class='col-sm-11 col-sm-offset-2'>
+    <img src="https://es.gravatar.com/userimage/129557126/fcb8aeb7e0617b79cde3f1607386aaf6.png">
+    </div>
+    </div>
+    {% endif%}
+    {% endblock %}-->
+    <div class="col-sm-10 col-sm-offset-2">
+    <div ALIGN="center">
+      <h1><a href="http://www.xoftix.com/xoftix/"><strong>VIDEO CAPITOL</strong></h1>
+      <h4 style="color: rgb(5, 5, 5)">TIENDA DE PELICULAS VIDEO CAPITOL</h4> 
+    <!--<img src="https://es.gravatar.com/userimage/129557126/1c34eb04615c6a9114dddb8668ee3b9f.png" style="width:70px;height:70px"/>-->
+    </a>
+    </div>
+  </div>
+</header>

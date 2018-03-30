@@ -1,0 +1,28 @@
+{% extends 'stylelogin.html' %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+{% block title %}{% trans "Log in" %}{% endblock %}
+
+{% block content %}
+<div class='row'>
+    <div class='col-sm-3 col-sm-offset-4'>
+<form method="post" action="">
+    <div class='col-sm-11 col-sm-offset-1'>
+        <h2 class='text-align-center'><strong>Iniciar Sesión</strong></h2><br/>
+    </div>
+    {% csrf_token %}
+    {{ form|crispy }}
+    <div class='col-sm-4 col-sm-offset-3'>
+    <input class="btn btn-primary" type="submit" value="{% trans 'Log in' %}" />
+    <input type="hidden" name="next" value="{{ next }}" />
+    </div>
+    
+</form>
+<div class='col-sm-11 col-sm-offset-1'>
+<p>{% trans "Olvidé mi contraseña?" %} <a href="{% url 'auth_password_reset' %}">{% trans "Recuperarla" %}</a>.</p>
+<p>{% trans "No estoy registrad@?" %} <a href="{% url 'registration_register' %}">{% trans "Registrarme" %}</a>.</p>
+</div>
+</div>
+</div>
+{% endblock %}
+

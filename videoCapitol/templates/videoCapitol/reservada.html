@@ -1,0 +1,28 @@
+<form action="." method="GET" name="id_pelicula">
+  <div ALIGN="center">
+    {% if query %}
+      {% if results %}
+        <ul>
+        {% for pelicula in results %}
+        {% if pelicula.inventario >= 1 %}
+        <h2>Has reservado la película "{{ pelicula.titulo}}" con éxito</h2>
+           <a href="{% url 'pelicula-list' %}">Regresar</a>
+        {% else %}
+           <h2>Pelicula agotada</h2>
+          <a href="{% url 'pelicula-list' %}">
+          <li>Regresar</li>
+        </a>
+        {% endif %}
+        {% endfor %}
+        </ul>
+      {% else %} 
+      <p>Error al reservar la pelicula "{{query|escape}}", Inventario vacio</p>
+      <a href="{% url 'pelicula-list' %}">
+        <li>Regresar</li>
+      </a>
+      {% endif %}
+    {% endif %}
+  </div>
+</form>
+
+

@@ -1,0 +1,22 @@
+{% extends "stylelogin.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Account Activated" %}{% endblock %}
+
+{% block content %}
+<p>
+    {% trans "Felicitaciones, su cuenta ha sido activada con éxito." %}
+    {% if not user.is_authenticated %}
+    {% endif %}
+    <a href="{% url 'auth_login' %}">Por favor inicie sesión</a>
+</p>
+{% endblock %}
+
+
+{% comment %}
+**registration/activation_complete.html**
+
+Used after successful account activation. This template has no context
+variables of its own, and should simply inform the user that their
+account is now active.
+{% endcomment %}
